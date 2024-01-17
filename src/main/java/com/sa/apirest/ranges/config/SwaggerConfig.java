@@ -39,13 +39,20 @@ public class SwaggerConfig {
             new Content().addMediaType(MediaType.APPLICATION_JSON_VALUE, 
                     new io.swagger.v3.oas.models.media.MediaType().addExamples("default",
                             new Example().value("{\"code\" : 500, \"Status\" : \"INTERNAL_SERVER_ERROR\", \"Message\" : \"Error interno\"}")))
-        );        
+        ); 
+        ApiResponse noContent = new ApiResponse().content(
+            new Content().addMediaType(MediaType.APPLICATION_JSON_VALUE, 
+                    new io.swagger.v3.oas.models.media.MediaType().addExamples("default",
+                            new Example().value("{\"code\" : 204, \"Status\" : \"NO_CONTENT\", \"Message\" : \"Solicitud con éxito.\"}")))
+        ); 
         
         Components components = new Components();
         components.addResponses("okAPI", okAPI);
         components.addResponses("notFound", notFound);
         components.addResponses("internalServerError", internalServerError);
         components.addResponses("badRequest", badRequest);
+        components.addResponses("noContent", noContent);
+
 
         
         return new OpenAPI()

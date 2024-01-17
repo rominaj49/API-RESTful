@@ -130,7 +130,7 @@ public abstract class BaseControllerImpl <E extends Base, S extends BaseServiceI
     @Operation(
         description = "Eliminar rango",
        responses = {
-            @ApiResponse(responseCode = "200", ref = "okAPI"),
+            @ApiResponse(responseCode = "204", ref = "noContent"),
             @ApiResponse(responseCode = "404", ref = "notFound"),
             @ApiResponse(responseCode = "500", ref = "internalServerError")
         }
