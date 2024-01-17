@@ -50,6 +50,11 @@ public class SwaggerConfig {
                     new io.swagger.v3.oas.models.media.MediaType().addExamples("default",
                             new Example().value("{\"code\" : 404, \"Status\" : \"NOT_FOUND\", \"Message\" : \"No se encontraron coincidencias en la búsqueda.\"}")))
         ); 
+        ApiResponse created = new ApiResponse().content(
+            new Content().addMediaType(MediaType.APPLICATION_JSON_VALUE, 
+                    new io.swagger.v3.oas.models.media.MediaType().addExamples("default",
+                            new Example().value("{\"code\" : 201, \"Status\" : \"CREATED\", \"Message\" : \"Solicitud con éxito\"}")))
+        ); 
         
         Components components = new Components();
         components.addResponses("okAPI", okAPI);
@@ -58,6 +63,7 @@ public class SwaggerConfig {
         components.addResponses("internalServerError", internalServerError);
         components.addResponses("badRequest", badRequest);
         components.addResponses("noContent", noContent);
+        components.addResponses("created", created);
 
 
         

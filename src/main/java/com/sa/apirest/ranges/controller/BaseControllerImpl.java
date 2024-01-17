@@ -74,8 +74,7 @@ public abstract class BaseControllerImpl <E extends Base, S extends BaseServiceI
     @Operation(
         description = "Crear rango",
         responses = {
-            @ApiResponse(responseCode = "200", ref = "okAPI"),
-            @ApiResponse(responseCode = "404", ref = "notFound"),
+            @ApiResponse(responseCode = "201", ref = "created"),
             @ApiResponse(responseCode = "400", ref = "badRequest"),
             @ApiResponse(responseCode = "500", ref = "internalServerError")
         }
@@ -115,7 +114,7 @@ public abstract class BaseControllerImpl <E extends Base, S extends BaseServiceI
         throw new BusinessException(HttpStatus.BAD_REQUEST,e.getMessage());  
         }
         catch(EntityNotFoundException e){
-        throw new BusinessException(HttpStatus.NOT_FOUND,e.getMessage()); //manda la excepcion y mensaje    
+        throw new BusinessException(HttpStatus.NOT_FOUND,e.getMessage());
         }
         
         catch(Exception e){
