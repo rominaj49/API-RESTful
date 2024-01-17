@@ -13,6 +13,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,11 +31,14 @@ public class RangesServiceImpl extends BaseServiceImpl<Ranges, Integer> implemen
     @Override
     public List<Ranges> search (String filter) throws Exception{
         try{
-           //List <Account> entities = accountRepository.findByBancoContainingOrNombreTitularContaining(filter, filter);
-           //List <Account> entities= accountRepository.search(filter);
            List<Ranges > entities = rangesRepository.searchNative(filter);
-           
+            if (entities.isEmpty()) {
+             throw new EntityNotFoundException("No se encontraron resultados similares");
+            }
             return entities;
+        }
+        catch(EntityNotFoundException e){   
+            throw e;
         }
         catch (Exception e){
             throw new Exception (e.getMessage());
@@ -44,8 +49,15 @@ public class RangesServiceImpl extends BaseServiceImpl<Ranges, Integer> implemen
     public Page<Ranges> search(String filter, Pageable pageable) throws Exception {    
         try{
             Page<Ranges> entities = rangesRepository.searchNative(filter,pageable);
+            if (entities.isEmpty()) {
+             throw new EntityNotFoundException("No se encontraron resultados similares");
+            }
             return entities;
-        }catch (Exception e){
+        }
+        catch(EntityNotFoundException e){   
+            throw e;
+        }
+        catch (Exception e){
             throw new Exception (e.getMessage());
         }       
     }

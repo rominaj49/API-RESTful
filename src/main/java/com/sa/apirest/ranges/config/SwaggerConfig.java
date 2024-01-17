@@ -45,10 +45,16 @@ public class SwaggerConfig {
                     new io.swagger.v3.oas.models.media.MediaType().addExamples("default",
                             new Example().value("{\"code\" : 204, \"Status\" : \"NO_CONTENT\", \"Message\" : \"Solicitud con éxito.\"}")))
         ); 
+        ApiResponse notFoundSearch = new ApiResponse().content(
+            new Content().addMediaType(MediaType.APPLICATION_JSON_VALUE, 
+                    new io.swagger.v3.oas.models.media.MediaType().addExamples("default",
+                            new Example().value("{\"code\" : 404, \"Status\" : \"NOT_FOUND\", \"Message\" : \"No se encontraron coincidencias en la búsqueda.\"}")))
+        ); 
         
         Components components = new Components();
         components.addResponses("okAPI", okAPI);
         components.addResponses("notFound", notFound);
+        components.addResponses("notFoundSearch", notFoundSearch);
         components.addResponses("internalServerError", internalServerError);
         components.addResponses("badRequest", badRequest);
         components.addResponses("noContent", noContent);
