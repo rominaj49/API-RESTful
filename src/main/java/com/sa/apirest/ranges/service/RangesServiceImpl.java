@@ -8,6 +8,7 @@ import com.sa.apirest.ranges.interfaces.RangesService;
 import com.sa.apirest.ranges.model.Ranges;
 import com.sa.apirest.ranges.repository.BaseRepository;
 import com.sa.apirest.ranges.repository.RangesRepository;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,9 +32,10 @@ public class RangesServiceImpl extends BaseServiceImpl<Ranges, Integer> implemen
            //List <Account> entities = accountRepository.findByBancoContainingOrNombreTitularContaining(filter, filter);
            //List <Account> entities= accountRepository.search(filter);
            List<Ranges > entities = rangesRepository.searchNative(filter);
-
+           
             return entities;
-        }catch (Exception e){
+        }
+        catch (Exception e){
             throw new Exception (e.getMessage());
         }  
     }

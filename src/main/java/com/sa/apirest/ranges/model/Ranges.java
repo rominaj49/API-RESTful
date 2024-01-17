@@ -16,7 +16,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "quotes")
+@Table(name = "ranges")
 public class Ranges extends Base{
     
     @NotNull(message = "El rango  no puede estar en blanco")
