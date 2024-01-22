@@ -33,13 +33,19 @@ public abstract class BaseControllerImpl <E extends Base, S extends BaseServiceI
        responses = {
             @ApiResponse(responseCode = "200", ref = "okAPI"),
             @ApiResponse(responseCode = "404", ref = "notFound"),
+            @ApiResponse(responseCode = "500", ref = "internalServerError")
+
         }
     )
     public ResponseEntity<?> getAllRecord() {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
-        }catch (Exception e){
-        throw new BusinessException(HttpStatus.NOT_FOUND,e.getMessage()); //manda la excepcion y mensaje    
+        }
+        catch (EntityNotFoundException e){
+        throw new BusinessException(HttpStatus.NOT_FOUND,e.getMessage());   
+        }
+        catch (Exception e){
+        throw new BusinessException(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage());   
         }
     }
     

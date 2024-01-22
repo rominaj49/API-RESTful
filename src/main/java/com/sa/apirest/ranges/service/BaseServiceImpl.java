@@ -32,8 +32,14 @@ public abstract class BaseServiceImpl <E extends Base, ID extends Serializable> 
         
         try{
             List<E> entities = baseRepository.findAll();
+            if (entities.isEmpty()) {
+             throw new EntityNotFoundException("No se encontraron registros");
+            }
             return entities;
-        }catch (Exception e){
+        }catch(EntityNotFoundException e){   
+            throw e;
+        }
+        catch (Exception e){
             throw new Exception (e.getMessage());
         }
     }
